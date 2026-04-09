@@ -6,6 +6,7 @@ load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+<<<<<<< Updated upstream
 def refine_text(text, style, mood="neutral"):
     mood_descriptions = {
         "romantic": "로맨틱하고 달달한",
@@ -16,12 +17,26 @@ def refine_text(text, style, mood="neutral"):
     }
     mood_desc = mood_descriptions.get(mood, "중립적인")
     
+=======
+def refine_text(text, style, mood):
+>>>>>>> Stashed changes
     if style == "poetic":
         prompt = f"다음 텍스트를 감성 가득한 시인 버전으로, {mood_desc} 분위기로 다듬어주세요: {text}"
     elif style == "professional":
         prompt = f"다음 텍스트를 깔끔한 직장인 버전으로, {mood_desc} 분위기로 다듬어주세요: {text}"
     else:
         return text
+
+    # Add mood to the prompt
+    mood_descriptions = {
+        "romantic": "로맨틱한 분위기로",
+        "comic": "코믹한 분위기로",
+        "serious": "진지한 분위기로",
+        "cute": "귀엽게",
+        "neutral": "중립적으로"
+    }
+    mood_desc = mood_descriptions.get(mood, "")
+    prompt = f"{mood_desc} {prompt}"
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
