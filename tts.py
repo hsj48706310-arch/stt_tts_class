@@ -1,6 +1,5 @@
 import asyncio
 import edge_tts
-import pygame
 import io
 
 async def _generate_audio(text, voice, rate=0, pitch=0, volume="+0%"):
@@ -22,12 +21,6 @@ def text_to_speech(text, voice_type="sweet", rate=0, pitch=0, volume=1.0):
     # volume을 edge_tts 형식으로 변환 (1.0 -> "+0%", 0.5 -> "-50%", 1.5 -> "+50%")
     volume_str = f"{int((volume - 1) * 100):+d}%"
 
-    # 비동기 함수 실행
+    # 비동기 함수 실행 및 오디오 데이터 반환
     audio_data = asyncio.run(_generate_audio(text, voice, rate, pitch, volume_str))
-
-    # pygame으로 재생
-    pygame.mixer.init()
-    pygame.mixer.music.load(io.BytesIO(audio_data))
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pygame.time.wait(100)
+    return audio_data

@@ -86,4 +86,5 @@ if "refined_text" in st.session_state:
     voice_type = st.radio("목소리 선택", ("여성 목소리", "남성 목소리"))
     if st.button("🔊 듣기"):
         voice_key = "sweet" if voice_type == "여성 목소리" else "character"
-        text_to_speech(st.session_state.refined_text, voice_key)
+        audio_data = text_to_speech(st.session_state.refined_text, voice_key)
+        st.audio(audio_data, format="audio/mp3")
