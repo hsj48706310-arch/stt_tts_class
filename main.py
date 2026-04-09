@@ -1,5 +1,5 @@
 import streamlit as st
-from llm import refine_text
+from llm import refine_and_analyze
 from tts import text_to_speech
 from stt import speech_to_text
 
@@ -55,10 +55,20 @@ if st.button("✨ 다듬기"):
         style_key = "poetic" if style == "감성 가득한 시인 버전" else "professional"
         mood_options = {"로맨틱": "romantic", "코믹": "comic", "진지": "serious", "귀엽게": "cute", "중립": "neutral"}
         mood_key = mood_options[mood]
-        refined = refine_text(user_text, style_key, mood_key)
-        st.session_state.refined_text = refined
+        result = refine_and_analyze(user_text, style_key, mood_key)
+        st.session_state.refined_text = result['message']
+        st.session_state.probability = result['probability']
+        st.session_state.reason = result['reason']
         st.success("다듬기 완료!")
-        st.text_area("다듬은 편지", value=refined, height=150)
+        
+        st.subheader("💌 교정된 고백")
+        st.write(result['message'])
+        
+        st.subheader("❤️ AI 성공 확률")
+        st.write(result['probability'])
+        
+        st.subheader("📊 AI 피드백")
+        st.write(result['reason'])
     else:
         st.error("텍스트를 입력하세요.")
 
