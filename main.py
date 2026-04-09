@@ -6,24 +6,33 @@ from stt import speech_to_text
 # 페이지 설정
 st.set_page_config(page_title="고백 교정기", page_icon="💌", layout="centered")
 
-# CSS for beige theme
+# CSS for pink love theme
 st.markdown("""
 <style>
-    .main {
-        background-color: #f5f5dc;
+    html, body, .main, .block-container, .css-1d391kg, .css-1d391kg .main, .stApp {
+        background-color: #ffe4ec !important;
+    }
+    .css-1y4p8pa.egzxvld3 {
+        background-color: #ffe4ec !important;
+    }
+    .css-18ni7ap.e8zbici2 {
+        background-color: transparent !important;
     }
     .stButton>button {
-        background-color: #d2b48c;
+        background-color: #ff7bac;
         color: white;
         border-radius: 10px;
     }
     .stTextInput, .stTextArea {
-        background-color: #faf0e6;
+        background-color: #fff0f6 !important;
     }
-    .stRadio > div {
-        background-color: #faf0e6;
+    .stRadio > div, .stSelectbox > div, .stMultiSelect > div {
+        background-color: #fff0f6 !important;
         padding: 10px;
         border-radius: 10px;
+    }
+    .css-1q8dd3e.e16nr0p30 {
+        background-color: #ffe4ec !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -60,20 +69,20 @@ if st.button("✨ 다듬기"):
         st.session_state.probability = result['probability']
         st.session_state.reason = result['reason']
         st.success("다듬기 완료!")
-        
-        st.subheader("💌 교정된 고백")
-        st.write(result['message'])
-        
-        st.subheader("❤️ AI 성공 확률")
-        st.write(result['probability'])
-        
-        st.subheader("📊 AI 피드백")
-        st.write(result['reason'])
     else:
         st.error("텍스트를 입력하세요.")
 
-# TTS
 if "refined_text" in st.session_state:
+    st.subheader("💌 교정된 고백")
+    st.write(st.session_state.refined_text)
+    
+    st.subheader("❤️ AI 성공 확률")
+    st.write(st.session_state.probability)
+    
+    st.subheader("📊 AI 피드백")
+    st.write(st.session_state.reason)
+
+    # TTS
     voice_type = st.radio("목소리 선택", ("여성 목소리", "남성 목소리"))
     if st.button("🔊 듣기"):
         voice_key = "sweet" if voice_type == "여성 목소리" else "character"
