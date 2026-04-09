@@ -116,7 +116,11 @@ if "refined_text" in st.session_state:
     with col2:
         if st.button("🔊 재생"):
             voice_key = "sweet" if voice_type == "여성 목소리" else "character"
-            text_to_speech(st.session_state.refined_text, voice_key)
+            try:
+                audio_data = text_to_speech(st.session_state.refined_text, voice_key)
+                st.audio(audio_data, format="audio/mp3")
+            except Exception as e:
+                st.error(f"음성 생성 오류: {str(e)}")
 
 # 하단 정보
 with st.expander("🔧 문제 해결 가이드"):
