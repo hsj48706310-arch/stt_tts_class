@@ -1,7 +1,7 @@
 import streamlit as st
-from app.llm import refine_and_analyze
-from app.tts_improved import text_to_speech
-from app.stt_improved import speech_to_text
+from llm import refine_and_analyze
+from tts import text_to_speech
+from stt import speech_to_text
 
 # 페이지 설정
 st.set_page_config(page_title="고백 교정기", page_icon="💌", layout="centered")
