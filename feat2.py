@@ -31,8 +31,8 @@ def recognize_speech():
 def refine_text(input_text, style):
     if style == "감성 가득한 시인 버전":
         prompt = f"다음 고백을 감성적이고 시적인 언어로 다듬어주세요: {input_text}"
-    elif style == "박력있는 사투리 버전":
-        prompt = f"다음 고백을 박력있는 사투리로 다듬어주세요: {input_text}"
+    elif style == "박력있는 직진 버전":
+        prompt = f"다음 고백을 박력있고 직진하는 언어로 다듬어주세요: {input_text}"
     elif style == "깔끔한 직장인 버전":
         prompt = f"다음 고백을 깔끔하고 직장인다운 언어로 다듬어주세요: {input_text}"
     else:
@@ -76,7 +76,7 @@ elif input_method == "음성":
 
 if input_text:
     # Style selection
-    style = st.selectbox("스타일 선택", ["감성 가득한 시인 버전", "박력있는 사투리 버전", "깔끔한 직장인 버전"])
+    style = st.selectbox("스타일 선택", ["감성 가득한 시인 버전", "박력있는 직진 버전", "깔끔한 직장인 버전"])
 
     if st.button("교정하기"):
         refined_text = refine_text(input_text, style)
@@ -89,7 +89,7 @@ if input_text:
 
         # TTS options
         voices = engine.getProperty('voices')
-        voice_options = [f"Voice {i}: {voice.name}" for i, voice in enumerate(voices)]
+        voice_options = [f"목소리 {i+1}" for i in range(len(voices))]
         selected_voice = st.selectbox("목소리 선택", voice_options)
 
         if st.button("듣기"):
