@@ -3,8 +3,8 @@ import edge_tts
 import pygame
 import io
 
-async def _generate_audio(text, voice, rate=0, pitch=0, volume=1.0):
-    communicate = edge_tts.Communicate(text, voice, rate=f"{rate:+d}%", pitch=f"{pitch:+d}Hz", volume=f"{int(volume * 100):+d}%")
+async def _generate_audio(text, voice, rate=0, pitch=0, volume="+100%"):
+    communicate = edge_tts.Communicate(text, voice, rate=f"{rate:+d}%", pitch=f"{pitch:+d}Hz", volume=volume)
     audio_data = b""
     async for chunk in communicate.stream():
         if chunk["type"] == "audio":
