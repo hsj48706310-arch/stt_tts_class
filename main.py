@@ -51,9 +51,12 @@ if st.button("✨ 다듬기"):
         refined = refine_text(user_text, style_key)
         st.session_state.refined_text = refined
         st.success("다듬기 완료!")
-        st.text_area("다듬은 편지", value=refined, height=150)
     else:
         st.error("텍스트를 입력하세요.")
+
+# 다듬은 텍스트 표시 (항상 표시)
+if "refined_text" in st.session_state:
+    st.text_area("다듬은 편지", value=st.session_state.refined_text, height=150)
 
 # TTS
 if "refined_text" in st.session_state:

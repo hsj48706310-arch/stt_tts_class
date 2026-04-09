@@ -1,0 +1,10 @@
+streamlit
+SpeechRecognition
+pyttsx3
+openai
+python-dotenv
+gtts
+playsound
+PyAudio
+edge-tts
+pygame
